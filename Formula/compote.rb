@@ -5,26 +5,12 @@ class Compote < Formula
   sha256 "3c77e0a09c9020c37e8abf52056ad58831cc546a5724558fd7583243fb5df36f"
   license "Apache-2.0"
   head "https://github.com/briannadoubt/compote.git", branch: "main"
-  
-    bottle do
-      root_url "https://github.com/briannadoubt/compote/releases/download/"
-      sha256 cellar: :any_skip_relocation, arm64_ventura: "9a478ddd07344759c62e4f8fd21522b2b731062743b6084c39480b6c53f90487"
-    end
 
-  depends_on "swift" => :build
-  depends_on xcode: ["16.0", :build]
-  depends_on :macos => :sequoia
-
-  def install
-    system "swift", "build",
-           "--disable-sandbox",
-           "-c", "release",
-           "--product", "compote"
-    bin.install ".build/release/compote"
-
-    # Install shell completions (optional)
-    generate_completions_from_executable(bin/"compote", "--generate-completion-script")
+  bottle do
+    root_url "https://github.com/briannadoubt/compote/releases/download/0.2.1"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe: "a64cfcab79c4ddb4cf59c6fa75b66adcf5dfbeedb7eced5e701cd2a1c2a48838"
   end
+  
 
   def caveats
     <<~EOS
