@@ -1,14 +1,13 @@
 class Compote < Formula
   desc "Docker Compose-like tool using Apple's Containerization framework"
   homepage "https://github.com/briannadoubt/compote"
-  url "https://github.com/briannadoubt/compote/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+  url "https://github.com/briannadoubt/compote/archive/refs/tags/0.2.1.tar.gz"
+  sha256 "99f3d886161d95d2a6d2fd9e4c7524cfad7f1e00f22b452efdfc93ab3739e3b0"
   license "Apache-2.0"
   head "https://github.com/briannadoubt/compote.git", branch: "main"
 
   depends_on "swift" => :build
-  depends_on xcode: ["15.0", :build]
-  depends_on "containerization"
+  depends_on xcode: ["16.0", :build]
   depends_on :macos => :sequoia
 
   def install
@@ -24,16 +23,17 @@ class Compote < Formula
 
   def caveats
     <<~EOS
-      Compote requires a Linux kernel to run containers.
+      Compote uses Apple's Containerization framework to run Linux containers on macOS.
 
-      The kernel is provided by the 'containerization' dependency and should
-      be automatically available at:
-        #{HOMEBREW_PREFIX}/share/containerization/kernel/vmlinuz
+      Requirements:
+        - macOS Sequoia (15.0) or later
+        - Xcode 16.0 or later
+        - Linux kernel (automatically downloaded on first run)
 
-      Run 'compote setup' to verify your installation.
+      Run 'compote setup' to verify your installation and download required components.
 
       For more information:
-        https://github.com/apple/containerization
+        https://github.com/briannadoubt/compote
     EOS
   end
 
