@@ -6,10 +6,6 @@ class Compote < Formula
   license "Apache-2.0"
   head "https://github.com/briannadoubt/compote.git", branch: "main"
 
-  bottle do
-    root_url "https://github.com/briannadoubt/compote/releases/download/0.2.1"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe: "a64cfcab79c4ddb4cf59c6fa75b66adcf5dfbeedb7eced5e701cd2a1c2a48838"
-  end
   
 
   def caveats
