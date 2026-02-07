@@ -6,7 +6,20 @@ class Compote < Formula
   license "Apache-2.0"
   head "https://github.com/briannadoubt/compote.git", branch: "main"
 
-  
+  depends_on "swift" => :build
+  depends_on xcode: ["16.0", :build]
+  depends_on :macos => :sequoia
+
+  def install
+    system "swift", "build",
+           "--disable-sandbox",
+           "-c", "release",
+           "--product", "compote"
+    bin.install ".build/release/compote"
+
+    # Install shell completions (optional)
+    generate_completions_from_executable(bin/"compote", "--generate-completion-script")
+  end
 
   def caveats
     <<~EOS
