@@ -2,7 +2,7 @@ class Raven < Formula
   desc "SwiftUI to DOM cross-compiler"
   homepage "https://github.com/briannadoubt/Raven"
   url "https://github.com/briannadoubt/Raven.git", branch: "main"
-  version "0.9.0-beta"
+  version "0.10.0"
   license "Apache-2.0"
   head "https://github.com/briannadoubt/Raven.git", branch: "main"
 
