@@ -1,9 +1,9 @@
 class Raven < Formula
   desc "SwiftUI to DOM cross-compiler"
   homepage "https://github.com/briannadoubt/Raven"
-  url "https://github.com/briannadoubt/Raven/archive/refs/tags/0.10.1.tar.gz"
-  sha256 "2a8e966265fe6ae4921ac50ec4fd031fb95fc4ea9c4349d2c90dc34750cd297f"
-  version "0.10.1"
+  url "https://github.com/briannadoubt/Raven/archive/refs/tags/0.10.2.tar.gz"
+  sha256 "1d25430cdea9c7e4c107e7ef6dacb1f887ed8218ea55149755ff0dc2e9ca9175"
+  version "0.10.2"
   license "Apache-2.0"
   head "https://github.com/briannadoubt/Raven.git", branch: "main"
 
