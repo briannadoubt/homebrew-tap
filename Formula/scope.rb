@@ -1,16 +1,27 @@
 class Scope < Formula
   desc "Local-first kanban for projects, epics, stories, and bugs — CLI + web UI + MCP"
   homepage "https://github.com/briannadoubt/scope"
-  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.1.tar.gz"
-  sha256 "fcb907ec7baccbdd0f5c4478d2a76b62f6a93eb4f3f4e27b2298713c0ecd5719"
+  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.2.tar.gz"
+  sha256 "fb70f87136a35394a240b768bb7443dcab88079a90c41d645673ad3d06078a71"
   license "MIT"
   head "https://github.com/briannadoubt/scope.git", branch: "main"
 
   depends_on "node"
 
   def install
-    system "npm", "install", *Language::Node.std_npm_install_args(libexec)
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    # Install runtime dependencies in-place. --omit=dev keeps the install small;
+    # there are no devDeps but the flag also future-proofs.
+    system "npm", "ci", "--omit=dev", "--no-audit", "--no-fund"
+
+    # Ship the whole tree (bin/, src/, node_modules/, package.json, LICENSE)
+    libexec.install Dir["*"]
+
+    # Expose the CLI on PATH
+    (bin/"scope").write <<~SH
+      #!/bin/bash
+      exec "#{Formula["node"].opt_bin}/node" "#{libexec}/bin/scope.js" "$@"
+    SH
+    chmod 0755, bin/"scope"
   end
 
   test do
