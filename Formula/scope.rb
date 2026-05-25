@@ -1,0 +1,28 @@
+class Scope < Formula
+  desc "Local-first kanban for projects, epics, stories, and bugs — CLI + web UI + MCP"
+  homepage "https://github.com/briannadoubt/scope"
+  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "fcb907ec7baccbdd0f5c4478d2a76b62f6a93eb4f3f4e27b2298713c0ecd5719"
+  license "MIT"
+  head "https://github.com/briannadoubt/scope.git", branch: "main"
+
+  depends_on "node"
+
+  def install
+    system "npm", "install", *Language::Node.std_npm_install_args(libexec)
+    bin.install_symlink Dir["#{libexec}/bin/*"]
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/scope --version")
+
+    # round-trip: init, create project, list projects as JSON, expect KEY
+    mkdir_p testpath/"app"
+    cd testpath/"app" do
+      system bin/"scope", "init"
+      system bin/"scope", "project", "create", "demo", "DEMO", "Demo project"
+      output = shell_output("#{bin}/scope --json project list")
+      assert_match "\"key\": \"DEMO\"", output
+    end
+  end
+end
