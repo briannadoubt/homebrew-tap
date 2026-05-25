@@ -1,8 +1,8 @@
 class Scope < Formula
   desc "Local-first kanban for projects, epics, stories, and bugs — CLI + web UI + MCP"
   homepage "https://github.com/briannadoubt/scope"
-  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.5.tar.gz"
-  sha256 "8d92c65e7bc459a169f8093e3d4f2b2b10629c90ef792e240ae6b426b927107a"
+  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.6.tar.gz"
+  sha256 "fa4b9f5ffba710906f8d99771877df6b38e9575e5567d99e3e53b198c1d6087e"
   license "MIT"
   head "https://github.com/briannadoubt/scope.git", branch: "main"
 
