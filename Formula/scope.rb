@@ -1,12 +1,14 @@
 class Scope < Formula
   desc "Local-first kanban for projects, epics, stories, and bugs — CLI + web UI + MCP"
   homepage "https://github.com/briannadoubt/scope"
-  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.2.tar.gz"
-  sha256 "fb70f87136a35394a240b768bb7443dcab88079a90c41d645673ad3d06078a71"
+  url "https://github.com/briannadoubt/scope/archive/refs/tags/v0.1.3.tar.gz"
+  sha256 "751cc271c7eecb157dc8cf35c15c4c28dd7015215cf157f1a5651dda66622500"
   license "MIT"
   head "https://github.com/briannadoubt/scope.git", branch: "main"
 
-  depends_on "node"
+  # Pin to LTS so prebuilt better-sqlite3 binaries are available. Latest "node"
+  # tracks the active branch (currently 26.x), which native modules lag behind.
+  depends_on "node@22"
 
   def install
     # Install runtime dependencies in-place. --omit=dev keeps the install small;
@@ -19,7 +21,7 @@ class Scope < Formula
     # Expose the CLI on PATH
     (bin/"scope").write <<~SH
       #!/bin/bash
-      exec "#{Formula["node"].opt_bin}/node" "#{libexec}/bin/scope.js" "$@"
+      exec "#{Formula["node@22"].opt_bin}/node" "#{libexec}/bin/scope.js" "$@"
     SH
     chmod 0755, bin/"scope"
   end
